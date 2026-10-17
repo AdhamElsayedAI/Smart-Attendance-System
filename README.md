@@ -1,10 +1,118 @@
+<div align="center">
+
 # AttendanceOS
 
-### A local, supervised examination attendance prototype
+**Smart examination attendance, designed for a supervised campus environment.**
 
-AttendanceOS pairs a React operator dashboard and student check-in display with a FastAPI service, a host-owned camera, face matching, an eye-blink challenge, and SQLite records. It is designed for a supervised Windows demonstration. The browser reads status and camera frames from the local API; only the API can save an attendance event.
+A local-first university prototype connecting a React operator workspace, a student check-in display, a Python computer-vision engine, and exam-aware attendance records.
 
-![AttendanceOS overview with synthetic demonstration data](docs/screenshots/overview-1440.png)
+<p>
+  <img alt="Prototype" src="https://img.shields.io/badge/STATUS-LOCAL%20PROTOTYPE-0F766E?style=flat-square" />
+  <img alt="Windows" src="https://img.shields.io/badge/PLATFORM-WINDOWS-2563EB?style=flat-square&amp;logo=windows&amp;logoColor=white" />
+  <img alt="No cloud dependency" src="https://img.shields.io/badge/DEPLOYMENT-LOCAL--FIRST-334155?style=flat-square" />
+  <img alt="License not specified" src="https://img.shields.io/badge/LICENSE-NOT%20SPECIFIED-64748B?style=flat-square" />
+</p>
+
+**[Explore Features](#what-the-prototype-does) · [System Architecture](#system-architecture) · [Run Locally](#windows-installation-and-startup) · [Verification](#verification)**
+
+</div>
+
+---
+
+## Technology Stack
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>Frontend</h3>
+      <p>
+        <img alt="React 19" src="https://img.shields.io/badge/React%2019-149ECA?style=flat-square&amp;logo=react&amp;logoColor=white" />
+        <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white" />
+        <img alt="Vite 7" src="https://img.shields.io/badge/Vite%207-646CFF?style=flat-square&amp;logo=vite&amp;logoColor=white" />
+        <img alt="React Router 7" src="https://img.shields.io/badge/React%20Router%207-CA4245?style=flat-square&amp;logo=reactrouter&amp;logoColor=white" />
+        <img alt="Motion" src="https://img.shields.io/badge/Framer%20Motion-764ABC?style=flat-square&amp;logo=framer&amp;logoColor=white" />
+        <img alt="Lucide" src="https://img.shields.io/badge/Lucide-F59E0B?style=flat-square" />
+      </p>
+      <sub>Responsive operations dashboard, student check-in and interaction design.</sub>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Backend &amp; API</h3>
+      <p>
+        <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" />
+        <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&amp;logo=fastapi&amp;logoColor=white" />
+        <img alt="Uvicorn" src="https://img.shields.io/badge/Uvicorn-4051B5?style=flat-square" />
+        <img alt="Pydantic" src="https://img.shields.io/badge/Pydantic-E92063?style=flat-square&amp;logo=pydantic&amp;logoColor=white" />
+      </p>
+      <sub>Loopback REST API, validation, camera sessions and event persistence.</sub>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Computer Vision</h3>
+      <p>
+        <img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&amp;logo=opencv&amp;logoColor=white" />
+        <img alt="dlib" src="https://img.shields.io/badge/dlib-14532D?style=flat-square" />
+        <img alt="face recognition" src="https://img.shields.io/badge/face__recognition-0F172A?style=flat-square" />
+        <img alt="NumPy" src="https://img.shields.io/badge/NumPy-013243?style=flat-square&amp;logo=numpy&amp;logoColor=white" />
+      </p>
+      <sub>Face embeddings, identity matching and landmark-based blink detection.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>Data &amp; Reporting</h3>
+      <p>
+        <img alt="SQLite" src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&amp;logo=sqlite&amp;logoColor=white" />
+        <img alt="CSV" src="https://img.shields.io/badge/CSV%20Export-16A34A?style=flat-square" />
+        <img alt="Local persistence" src="https://img.shields.io/badge/Local%20Storage-A16207?style=flat-square" />
+      </p>
+      <sub>Exam rosters, enrollment records, unique attendance and exportable reports.</sub>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Testing &amp; Quality</h3>
+      <p>
+        <img alt="Python unittest" src="https://img.shields.io/badge/unittest-334155?style=flat-square&amp;logo=python&amp;logoColor=white" />
+        <img alt="pytest" src="https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&amp;logo=pytest&amp;logoColor=white" />
+        <img alt="Playwright" src="https://img.shields.io/badge/Playwright-2EAD33?style=flat-square&amp;logo=playwright&amp;logoColor=white" />
+        <img alt="TypeScript checks" src="https://img.shields.io/badge/Typecheck-2563EB?style=flat-square" />
+      </p>
+      <sub>Automated Python checks, browser journeys and production builds.</sub>
+    </td>
+    <td width="33%" valign="top">
+      <h3>Runtime &amp; Tooling</h3>
+      <p>
+        <img alt="Windows" src="https://img.shields.io/badge/Windows-0078D4?style=flat-square&amp;logo=windows&amp;logoColor=white" />
+        <img alt="PowerShell" src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&amp;logo=powershell&amp;logoColor=white" />
+        <img alt="Node.js" src="https://img.shields.io/badge/Node.js-339933?style=flat-square&amp;logo=nodedotjs&amp;logoColor=white" />
+        <img alt="npm" src="https://img.shields.io/badge/npm-CB3837?style=flat-square&amp;logo=npm&amp;logoColor=white" />
+      </p>
+      <sub>One-machine development, reproducible installation and local demo launch.</sub>
+    </td>
+  </tr>
+</table>
+
+**Implementation references:** [Python requirements](attendance_pro/requirements.txt) · [Development requirements](attendance_pro/requirements-dev.txt) · [Frontend package](attendance_pro/frontend/package.json)
+
+## At a Glance
+
+<table>
+  <tr>
+    <td width="25%" valign="top"><strong>Identity-aware check-in</strong><br /><sub>Enrolled face matching plus an identity-bound blink challenge.</sub></td>
+    <td width="25%" valign="top"><strong>Exam-scoped attendance</strong><br /><sub>Explicit rosters and database-enforced duplicate prevention.</sub></td>
+    <td width="25%" valign="top"><strong>University workspace</strong><br /><sub>Students, exams, live sessions, analytics and diagnostics.</sub></td>
+    <td width="25%" valign="top"><strong>Local-first design</strong><br /><sub>Camera and SQLite data stay on the operator's host.</sub></td>
+  </tr>
+</table>
+
+<p align="center">
+  <strong>System at a glance</strong><br />
+  <code>React + Vite</code> &rarr; <code>FastAPI</code> &rarr; <code>OpenCV + dlib</code> &rarr; <code>SQLite</code><br />
+  <sub>Camera processing and attendance writes happen on the Python host. The browser displays API-confirmed outcomes.</sub>
+</p>
+
+![AttendanceOS overview — synthetic demonstration data](docs/screenshots/overview-1440.png)
+
+> [!NOTE]
+> **Prototype verification:** Automated tests and browser journeys are documented below. Live face recognition through blink-to-database attendance on physical hardware is **not yet verified**. Blink detection is a limited liveness cue, not a comprehensive anti-spoofing solution.
+
 
 ## What the prototype does
 
@@ -16,17 +124,6 @@ AttendanceOS pairs a React operator dashboard and student check-in display with 
 - **Reporting:** examine saved records, known-roster assigned/present/absent counts, attendance rates, and a CSV export. Historical exams with unknown rosters retain their records but have no inferred denominator.
 - **Diagnostics:** inspect SQLite, native CV availability, landmark model, camera ownership, and a release-after-probe camera check.
 
-## Technology
-
-| Layer | Source and dependencies |
-| --- | --- |
-| Web | React 19, TypeScript, Vite 7, React Router 7, Framer Motion, Lucide React |
-| API | Python, FastAPI, Uvicorn, Pydantic (via FastAPI) |
-| Vision | OpenCV, `face-recognition`, dlib, NumPy; 68-point landmark predictor supplied locally |
-| Data | SQLite through Python's `sqlite3`; local face photos and embedding blobs |
-| Checks | Python `unittest`, pytest, HTTPX and HTTPX2 for development, TypeScript compiler, Vite build, Playwright browser scripts |
-
-The Python constraints are in [`attendance_pro/requirements.txt`](attendance_pro/requirements.txt), development additions in [`requirements-dev.txt`](attendance_pro/requirements-dev.txt), and JavaScript dependencies in [`package.json`](attendance_pro/frontend/package.json).
 
 ## System architecture
 
